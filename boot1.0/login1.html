@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <link rel="stylesheet" href="framework/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="framework/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+    <script src="framework/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <!--字体-->
+    <script src="js/textyleF.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .bg{
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background-image: url('img/login_img/bg0.jpg');
+            background-size: 100%;
+            z-index: -1;
+            animation: mybgMove linear 4s forwards 3s;
+        }
+        .bg_text{
+            margin-top: 300px;
+        }
+        .bg2{
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background: whitesmoke;
+            text-align: center;
+            animation: mybgMove2 linear 4s forwards;
+        }
+        .bg2 h1{
+            margin-top: 200px;
+        }
+        .jindu{
+            margin-top: 200px;
+        }
+        #jindu{
+            width: 0;
+            animation: myJindu linear 3s forwards,donghua linear 2s infinite;
+        }
+        @keyframes mybgMove {
+            0%{
+                transform: scale(1);
+            }
+            25%{
+                transform: scale(1.2);
+            }
+            50%{
+                transform: scale(1.4);
+            }
+            75%{
+                transform: scale(1.6);
+            }
+            90%{
+                transform: scale(1.7);
+            }
+            100%{
+                transform: scale(1.7);
+            }
+        }
+        @keyframes myJindu {
+            0%{
+                width: 0;
+            }
+            40%{
+                width: 45%;
+            }
+            50%{
+                width: 50%;
+            }
+            55%{
+                width: 52%;
+            }
+            90%{
+                width: 110%;
+            }
+            100%{
+                width: 110%;
+
+            }
+        }
+        @keyframes donghua{
+            0%{
+                margin-left: 0;
+            }
+            100%{
+                margin-left: -10%;
+            }
+        }
+        @keyframes mybgMove2 {
+            100%{
+                z-index: -2;
+            }
+        }
+        @import url("https://fonts.googleapis.com/css?family=Heebo:900");
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: .2rem 0 0 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+            font-size: 7rem;
+            line-height: 1;
+            letter-spacing: .3rem;
+            color: #253057;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 450px) {
+            p {
+                font-size: 3rem;
+            }
+            p.desc {
+                font-size: .5rem;
+            }
+        }
+        .ex1 {
+            opacity: 0;
+            perspective: 200px;
+            transition-delay: 6s;
+            font-family: 华文行楷;
+        }
+        .ex1 span {
+            transform: rotateY(-90deg);
+            opacity: 0;
+            transition-delay: 6s;
+        }
+
+        .ex2 {
+            opacity: 0;
+            margin-left: 300px;
+            perspective: 200px;
+            transition-delay: 6s;
+            font-size: 40px;
+            font-family: 华文行楷;
+        }
+        .ex2 span {
+            transform: rotateY(-90deg) rotateX(45deg);
+            transform-origin: -50% 75%;
+            opacity: 0;
+            transition-delay: 6s;
+        }
+    </style>
+</head>
+<body>
+<!--背景-->
+<div class="bg text-center">
+    <div class="bg_text" >
+        <div class="htmleaf-content ">
+            <p class="ex1">小奶音幼儿园</p>
+            <p class="ex2">管理系统</p>
+        </div>
+    </div>
+</div>
+<a href="Html/login2.html" style="margin-left:800px ;font-size: 60px;margin-top: 500px;text-decoration: none;font-family: 'Source Code Pro', monospace ">next</a>
+<div class="bg2 col-md-12">
+    <!--进度条-->
+    <h1 id="jindutext">加载中。。。</h1>
+    <div class="progress progress-striped active jindu ">
+        <div id="jindu" class="progress-bar progress-bar-success" role="progressbar"
+             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+        </div>
+    </div>
+</div>
+<script>
+    $(window).on('load',function(){
+        $('.ex1').textyleF();
+        $('.ex2').textyleF({
+            duration : 2000,
+            delay : 500,
+            easing : 'cubic-bezier(0.785, 0.135, 0.15, 0.86)',
+            callback : function(){
+                $(this).css({
+                    color : '#b35c00',
+                    transition : '3s',
+                });
+                $('.desc').css('opacity',1);
+            }
+        });
+    });
+</script>
+</body>
+</html>

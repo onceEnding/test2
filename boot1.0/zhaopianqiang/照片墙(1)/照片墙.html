@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>照片墙</title>
+    <meta http-equiv="X-UA-Compatible" content="IE-edge" >
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/lgallery.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/demo.min.css">
+    <link rel="stylesheet" href="css/照片墙主页.css">
+</head>
+<body>
+<div id="photoWall"  class="container photoBox">
+    <header>
+        <div class="container">
+            <h1><a href="照片墙.html">照片墙</a></h1>
+            <div class="headerBotton">
+                <div class="left"><button id="btnAdd" type="button" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新建班级相册</button></div>
+                <ul class="right">
+                    <li class="checkAlbum">
+                        <span>-请选择年级-</span>
+                        <input type="hidden" name="test_1" class="value" value="" />
+                        <ul id="tab" class="select">
+                            <li value="1" onclick="tab(1)">2017级1班</li>
+                            <li value="2" onclick="tab(2)">2017级2班</li>
+                            <li value="3" onclick="tab(3)">2017级3班</li>
+                            <li value="4" onclick="tab(4)">2018级1班</li>
+                            <li value="5" onclick="tab(5)">2018级2班</li>
+                            <li value="6" onclick="tab(6)">2018级3班</li>
+                            <li value="7" onclick="tab(7)">2019级1班</li>
+                            <li value="8" onclick="tab(8)">2019级2班</li>
+                            <li value="9" onclick="tab(9)">2019级3班</li>
+                            <li value="10" onclick="tab(10)">2020级1班</li>
+                            <li value="11" onclick="tab(11)">2020级2班</li>
+                            <li value="12" onclick="tab(12)">2020级3班</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="Lgallery container" id="lgallery" style="padding-top: 0;margin: 0 auto;text-align: center">
+            <div class="Wrapper container">
+                <div class="TemplateLgallery" data-lgallery="" style="position: relative;" id="content1">
+                    <div class="TemplateLgallery-Item">
+                        <a href="每班相册.html"><img src="image/1.jpg" alt="2017级1班" title="2017级1班"><span>2017级1班</span></a>
+                    </div>
+                </div>
+                <div class="TemplateLgallery" data-lgallery="" style="position: relative;" id="content2">
+                    <div class="TemplateLgallery-Item">
+                        <a href="每班相册.html"><img src="image/4.jpg" alt="2018级2班" title="2018级2班"><span>2017级2班</span></a>
+                    </div>
+                </div>
+                <div class="TemplateLgallery" data-lgallery="" style="position: relative;" id="content3">
+                    <div class="TemplateLgallery-Item">
+                        <a href="每班相册.html"><img src="image/3.jpg" alt="2018级3班" title="2018级3班"><span>2017级3班</span></a>
+                    </div>
+                </div>
+                <div class="TemplateLgallery" data-lgallery="" style="position: relative;" id="content4">
+                    <div class="TemplateLgallery-Item">
+                        <a href="每班相册.html"><img src="image/5.jpg" alt="2018级1班" title="2018级1班"><span>2018级1班</span></a>
+                    </div>
+                </div>
+                <div class="TemplateLgallery" data-lgallery="" style="position: relative;" id="content5">
+                    <div class="TemplateLgallery-Item">
+                        <a href="每班相册.html"><img src="image/6.jpg" alt="2018级2班" title="2018级2班"><span>2018级2班</span></a>
+                    </div>
+                </div>
+                <div class="TemplateLgallery" data-lgallery="" style="position: relative;" id="content6">
+                    <div class="TemplateLgallery-Item">
+                        <a href="每班相册.html"><img src="image/7.jpg" alt="2018级3班" title="2018级3班"><span>2018级3班</span></a>
+                    </div>
+                </div>
+                <div class="TemplateLgallery" data-lgallery="" style="position: relative;" id="content7">
+                    <div class="TemplateLgallery-Item">
+                        <a href="每班相册.html"><img src="image/8.jpg" alt="2019级1班" title="2019级1班"><span>2019级1班</span></a>
+                    </div>
+                </div>
+                <div class="TemplateLgallery" data-lgallery="" style="position: relative;" id="content8">
+                    <div class="TemplateLgallery-Item">
+                        <a href="每班相册.html"><img src="image/9.jpg" alt="2019级2班" title="2019级2班"><span>2019级2班</span></a>
+                    </div>
+                </div>
+                <div class="TemplateLgallery" data-lgallery="" style="position: relative;" id="content9">
+                    <div class="TemplateLgallery-Item">
+                        <a href="每班相册.html"><img src="image/10.jpg" alt="2019级3班" title="2019级3班"><span>2019级3班</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!--模态框-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">新增班级相册</h4>
+            </div>
+            <div id="divAdd">
+                <form action="#" id="addForm">
+                    <p>班级名称：
+                        <select id="grade">
+                            <option value ="请选择年级" selected="selected">---请选择年级---</option>
+                            <option value ="2017级">2017级</option>
+                            <option value ="2018级">2018级</option>
+                            <option value ="2019级">2019级</option>
+                            <option value ="2019级">2020级</option>
+                        </select>
+                        <select id="ClassJi">
+                            <option value ="请选择班级" selected="selected">---请选择班级---</option>
+                            <option value ="1班">1班</option>
+                            <option value ="2班">2班</option>
+                            <option value ="3班">3班</option>
+                        </select>
+                    </p>
+                    <p>添加相册：<input type="file" id="myFile" name="classFile" title=""></p>
+                    <p>添加相册描述：<textarea id="AlbumsText"></textarea></p>
+                    <p>
+                        <button id="btnAddData" type="button"  class="btn btn-default" data-dismiss="modal">确认发布</button>
+                    <button id="btnCancel" type="button" class="btn btn-primary" data-dismiss="modal">取消发布</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.3.4.1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/lgallery.min.js"></script>
+<script type="text/javascript">
+    //确认发布新建相册
+    $("#btnAddData").click(function () {
+        var grade=$("#grade option:selected").text();
+        var ClassJi=$("#ClassJi option:selected").text();
+        var myFile=$("#myFile").val();
+        var AlbumsText=$("#AlbumsText").val();
+        var reads = new FileReader();
+        var f = $("#myFile").get(0).files[0];
+        reads.readAsDataURL(f);
+        reads.onload=function(){
+            var img = document.createElement("img");
+            img.src =this.result;
+            if($("#photoWall section #lgallery .Wrapper .TemplateLgallery .TemplateLgallery-Item a span").text().match($("#grade option:selected").text()+$("#ClassJi option:selected").text())){
+               alert("你新增的班级相册已存在！");
+            }else {
+            $("#photoWall section #lgallery .Wrapper").append(
+            "<div class=\"TemplateLgallery NewAlbums\" data-lgallery=\"\" style=\"position: relative;\">"+
+            "<div class=\"TemplateLgallery-Item\">"+
+            "<a href=\"每班相册.html\">"+"<span>"+grade+ClassJi+"</span>"+"</a>"+
+            "</div>"+
+            "</div>");
+            $(".NewAlbums .TemplateLgallery-Item a").append(img);
+        } }
+    });
+
+    //    选择
+    var contentArr=$("#photoWall section #lgallery .Wrapper>.TemplateLgallery");
+    function tab(num) {
+        //隐藏所有内容
+        for(var i=0;i<contentArr.length;i++){
+            contentArr[i].className="hide";
+        }
+        document.getElementById("content"+num).className="show";
+    }
+
+</script>
+
+</body>
+
+</html>

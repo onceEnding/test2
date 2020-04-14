@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幼儿园管理系统</title>
+    <link href="../framework/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../framework/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../framework/menu/assets/css/jquery.mCustomScrollbar.min.css" />
+    <link rel="stylesheet" href="../framework/menu/assets/css/custom.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dcalendar.picker.css"/>
+    <link href="../css/animate.css" rel="stylesheet"/>
+    <style>
+/*文字 */
+        .word {
+            bottom: 0;
+            color: #fff;
+            font-size: 2.5em;
+            height: 2.5em;
+            left: 0;
+            line-height: 2.5em;
+            margin: auto;
+            right: 0;
+            position: absolute;
+            text-shadow: 0 0 10px rgba(50, 255, 50, 0.5), 0 0 5px rgba(100, 255, 100, 0.5);
+            top: 70px;
+            z-index: 5;
+        }
+        iframe{
+            display: none;
+        }
+        /*模态框*/
+        body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .htmleaf-content{
+            width: 300px;
+            margin:  20px auto;
+        }
+        .item {
+            max-width: 65%;
+            padding: 1em;
+            background: #eee;
+            display: none;
+            position: relative;
+            -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+            border-radius: 3px;
+            color: #000;
+        }
+
+        .item-close {
+            cursor: pointer;
+            right: 5px;
+            top: 5px;
+            position: absolute;
+            background: #222;
+            color: #fff;
+            border-radius: 100%;
+            font-size: 14px;
+            height: 24px;
+            line-height: 22px;
+            text-align: center;
+            width: 24px;
+        }
+        .mytankuang1{
+            background: url("../img/pic.jpg") no-repeat;
+            background-size: 100%;
+            margin-top: 10px;
+            color: #c6c6c6;
+        }
+        .mytankuang1 input{
+            background: rgba(255, 255, 255, 0.25);
+        }
+    </style>
+</head>
+<body style="background: none">
+<div class="htmleaf-container">
+    <div id="item" class="item">
+        <h3>设置</h3>
+        <p>修改你的相关资料</p>
+        <form class="mytankuang1">
+            <table>
+                <tr>
+                    <td class="str1">账号：</td>
+                    <td class="str2"><input type="text" name="id" placeholder="admin"></td>
+                </tr>
+                <tr>
+                    <td class="str1">用户名称：</td>
+                    <td class="str2"><input type="text" name="user" placeholder="系统管理员"></td>
+                </tr>
+                <tr>
+                    <td class="str1">请输入旧密码：</td>
+                    <td class="str2"><input type="password" name="oldpwd"> <span class="sp1">*</span> <span class="sp2">你本次登录时的密码</span> </td>
+                </tr>
+                <tr>
+                    <td class="str1">请输入新密码：</td>
+                    <td class="str2"><input type="password" name="newpwd"> <span class="sp1">*</span> <span class="sp2">新密码不少于6个字符</span> </td>
+                </tr>
+                <tr>
+                    <td class="str1">请确认新密码：</td>
+                    <td class="str2"><input type="password" name="newpwd1"> <span class="sp1">*</span> <span class="sp2">新密码不少于6个字符</span> </td>
+                </tr>
+                <tr>
+                    <td class="str1">性别：</td>
+                    <td class="str2">
+                        <input type="radio" name="sex" checked>男
+                        <input type="radio" name="sex">女
+                    </td>
+                </tr>
+                <tr>
+                    <td class="str1">年龄</td>
+                    <td class="str2"><input type="number" name="age"></td>
+                </tr>
+                <tr>
+                    <td class="str1">入职年龄：</td>
+                    <td class="str2"><input type="date" name="date" placeholder="2020-04-12"  style="width: 170px"></td>
+                </tr>
+                <tr>
+                </tr>
+                <tr>
+                    <td class="str1">联系电话：</td>
+                    <td class="str2"><input type="text" name="phone"></td>
+                </tr>
+                <tr>
+                    <td class="str1">电子邮箱：</td>
+                    <td class="str2"><input type="email" name="email"></td>
+                </tr>
+            </table>
+            <div class="scd0">
+                <input type="submit" value="提交" class="sdi0">
+                <input type="reset" value="重置" class="sdi1">
+            </div>
+        </form>
+        <b class="item-close js-popup-close">x</b>
+    </div>
+</div>
+<div class="page-wrapper">
+    <nav id="sidebar" class="sidebar-wrapper" style="z-index: 99">
+        <div class="sidebar-content">
+            <a href="#" id="toggle-sidebar"><i class="fa fa-bars"></i></a>
+            <div class="sidebar-brand">
+                <a href="#">（奶音）幼儿园管理</a>
+            </div>
+            <div class="sidebar-header">
+                <div class="user-pic">
+                    <img class="img-responsive img-rounded" src="../img/head_wang.jpg" alt="">
+                </div>
+                <div class="user-info">
+                    <span class="user-name">miss<strong> wang</strong></span>
+                    <span class="user-role">管理员</span>
+                    <div class="user-status">
+                        <a href="#"><span class="label label-success">在线</span></a>
+                    </div>
+                </div>
+            </div><!-- sidebar-header  -->
+            <div class="sidebar-search">
+                <div>
+                    <div class="input-group">
+                        <input type="text" class="form-control search-menu" placeholder="请输入...">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    </div>
+                </div>
+            </div><!-- sidebar-search  -->
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="header-menu"><span>菜单</span></li>
+                    <li class="sidebar-dropdown">
+                        <a  href="#"><i class="fa fa-tv"></i><span>公告</span><span class="label label-danger">New</span></a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="#" onclick="gonggao1()">公告栏<span class="label label-success">10</span></a> </li>
+                                <li><a href="#" onclick="gonggao2()">公告管理</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#"><i class="fa fa-photo"></i><span>照片墙</span><span class="badge">3</span></a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="#" onclick="gonggao3()">照片墙 <span class="badge">3</span></a></li>
+                                <li><a href="#" onclick="gonggao31()">精选相册</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#"><i class="fa fa-bar-chart-o"></i><span>信息管理</span></a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="#" onclick="gonggao4()">部门管理</a></li>
+                                <li><a href="#" onclick="gonggao5()">职工管理</a></li>
+                                <li><a href="#" onclick="gonggao6()">班级管理</a></li>
+                                <li><a href="#" onclick="gonggao7()">学生管理</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="#"><i class="fa fa-diamond"></i><span>考勤系统</span></a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="#" onclick="gonggao8()">考勤管理</a></li>
+                                <li><a href="#">submenu 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="#"><i class="fa fa-exclamation-triangle"></i><span>权限管理</span></a></li>
+                </ul>
+            </div><!-- sidebar-menu  -->
+        </div><!-- sidebar-content  -->
+
+        <div class="sidebar-footer">
+            <a href="#"><i class="fa fa-bell"></i><span class="label label-warning notification">3</span></a>
+            <a href="#"><i class="fa fa-envelope"></i><span class="label label-success notification">7</span></a>
+            <a href="#" class="btn1" title="修改资料"><i class="fa fa-gear"></i></a>
+            <a href="../login1.html" title="退出登录"><i class="fa fa-power-off"></i></a>
+        </div>
+    </nav><!-- sidebar-wrapper  -->
+    <div class="canvas-bg-image" style="position: fixed">
+        <div></div>
+    </div>
+    <main class="page-content" style="position:absolute;top: 0">
+        <div class="container-fluid">
+            <div class="row" style="height: 100px">
+                <div class="col-md-2"style="z-index: 5;">
+                    <a href="#" onclick="Home_page()"><img style="margin-left: 20px;margin-top: -20px" src="../img/logo2.png" alt="" height="100px" width="260px" title="点击返回首页"></a>
+                </div>
+                <div class="col-md-5 text-left">
+                    <div class="word"><small>当前位置：</small><span id="hedtxt">首页</span></div>
+                </div>
+            </div>
+            <div class="row" id="Home_page">
+                <div class="col-md-2" style="z-index: 5;">
+                    <div class="col-md-12" style="position:absolute;background:rgba(255,255,255,0.57);height: 400px;">
+                        <h3 style="font-family: 华文行楷">公告栏</h3>
+                        <ul style="color: #0B9BA9;list-style: none">
+                            <li><a href="../gonggao/管理/manager.html" style="text-decoration: none">幼儿园学籍录入工作的通知</a></li>
+                            <li><a href="../gonggao/管理/manager.html" style="text-decoration: none">幼儿园学籍录入工作的通知</a></li>
+                            <li><a href="../gonggao/管理/manager.html" style="text-decoration: none">幼儿园学籍录入工作的通知</a></li>
+                            <li><a href="../gonggao/管理/manager.html" style="text-decoration: none">幼儿园学籍录入工作的通知</a></li>
+                            <li><a href="../gonggao/管理/manager.html" style="text-decoration: none">幼儿园学籍录入工作的通知</a></li>
+                            <li><a href="../gonggao/管理/manager.html" style="text-decoration: none">幼儿园学籍录入工作的通知</a></li>
+                            <li><a href="../gonggao/管理/manager.html" style="text-decoration: none">幼儿园学籍录入工作的通知</a></li>
+                            <li><a href="../gonggao/管理/manager.html" style="text-decoration: none">幼儿园学籍录入工作的通知</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8 text-center" style="z-index: 5;overflow: hidden">
+                    <iframe src="../202001083698/index.html" style="display: block;border: none;margin-left: 32px" height="600px" width="100%" scrolling="auto">
+
+                    </iframe>
+                </div>
+                <table id='mycalendar' class='calendar col-md-1' style="margin-left: 10px"></table>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10" style="z-index: 5">
+                    <iframe width="100%" height="800px" id="content1" src="">
+
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </main><!-- page-content" -->
+</div><!-- page-wrapper -->
+
+
+<script src="../framework/jquery-3.3.1/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="../framework/menu/js/jquery-1.11.0.min.js"><\/script>')</script>
+<script src="../framework/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="../framework/menu/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="../framework/menu/assets/js/custom.js"></script>
+<!--背景-->
+<script  src="../js/demo.js"></script>
+<!--日历-->
+<script type="text/javascript" src="../js/dcalendar.picker.js"></script>
+<script type="text/javascript">
+    $('#mydatepicker').dcalendarpicker();
+    $('#mydatepicker2').dcalendarpicker({
+        format:'yyyy-mm-dd'
+    });
+    $('#mycalendar').dcalendar();
+</script>
+<script>
+    function Home_page() {
+        $("#Home_page").css("display","block");
+        $("#content1").css("display","none");
+        $("#hedtxt").html("首页")
+    }
+    function gonggao1() {
+        $("#Home_page").css("display","none");
+        $("#content1").css("display","block").attr("src","../gonggao/管理/op.html");
+        $("#hedtxt").html("首页>公告>公告栏")
+    }
+    function gonggao2() {
+        $("#Home_page").css("display","none");
+        $("#content1").css("display","block").attr("src","../gonggao/管理/manager.html");
+        $("#hedtxt").html("首页>公告>公告管理")
+    }
+    function gonggao3() {
+        $("#Home_page").css("display","none");
+        $("#content1").css("display","block").attr("src","../zhaopianqiang/照片墙(1)/照片墙.html");
+        $("#hedtxt").html("首页>照片墙")
+    }
+    function gonggao31() {
+        $("#Home_page").css("display","none");
+        $("#content1").css("display","block").attr("src","../202001083698/index.html");
+        $("#hedtxt").html("首页>照片墙>精选照片")
+    }
+    function gonggao4() {
+        $("#Home_page").css("display","none");
+        $("#content1").css("display","block").attr("src","../guanlixit/zlh_dep_emp/zlh_dep_emp/kind_dep.html");
+        $("#hedtxt").html("首页>信息管理>部门管理")
+    }
+    function gonggao5() {
+        $("#Home_page").css("display","none");
+        $("#content1").css("display","block").attr("src","../guanlixit/zlh_dep_emp/zlh_dep_emp/kind_emp.html");
+        $("#hedtxt").html("首页>信息管理>职工管理")
+    }
+    function gonggao6() {
+        $("#Home_page").css("display","none");
+        $("#content1").css("display","block").attr("src","../guanlixit/js_obj/banJiGuanLi.html");
+        $("#hedtxt").html("首页>信息管理>班级管理")
+    }
+    function gonggao7() {
+        $("#Home_page").css("display","none");
+        $("#content1").css("display","block").attr("src","../guanlixit/js_obj/XueShengGuanLi.html");
+        $("#hedtxt").html("首页>信息管理>学生管理")
+    }
+    function gonggao8() {
+        $("#Home_page").css("display","none");
+        $("#content1").css("display","block").attr("src","../kaoqin/project2/kaoqin.html");
+        $("#hedtxt").html("首页>考勤系统>考勤管理")
+    }
+</script>
+<script src="../js/jquery.popup.js"></script>
+<script>
+    $(function () {
+        $('.btn1').on('click', function () {
+            $('#item').popup({
+                time: 1000,
+                classAnimateShow: 'flipInX',
+                classAnimateHide: 'hinge',
+                onPopupClose: function e() {
+                    // console.log('0')
+                },
+                onPopupInit: function e() {
+                    // console.log('1')
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

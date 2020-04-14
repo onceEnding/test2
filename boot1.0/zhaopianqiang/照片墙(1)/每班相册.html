@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>每班相册</title>
+    <meta http-equiv="X-UA-Compatible" content=" IE- edge" >
+    <meta name= " viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/每班相册.css">
+</head>
+<body>
+<div id="classPhotoWall">
+    <!--头部-->
+    <header>
+        <div class="container">
+            <h4 class="left"><a href="照片墙.html">照片墙</a>>班级相册</h4>
+            <button id="btnAdd" type="button" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新建相册</button>
+        </div>
+    </header>
+    <!--相册内容-->
+    <section>
+        <div class="container" id="AlbumsOne">
+            <h3>校园一刻相册</h3>
+            <div><a href="每个相册.html" class="thumbnail"><img src="image/11.jpg" alt="校园一刻相册" title="校园一刻相册"><span>校园一刻相册</span><span class="glyphicon glyphicon-trash" id="delFont"></span></a></div>
+        </div>
+        <div class="container" id="MidAutumnAlbums">
+            <h3>中秋相册</h3>
+            <div><a href="每个相册.html" class="thumbnail"><img src="image/12.jpg" alt="中秋活动相册" title="中秋活动相册"><span>中秋活动相册</span><span class="glyphicon glyphicon-trash" id="delFont2"></span></a></div>
+        </div>
+        <div class="container" id="nationalAlbums">
+            <h3>国庆相册</h3>
+            <div><a href="每个相册.html" class="thumbnail"><img src="image/13.jpg" alt="国庆活动相册" title="国庆活动相册"><span>国庆活动相册</span><span class="glyphicon glyphicon-trash" id="delFont3"></span></a></div>
+        </div>
+    </section>
+</div>
+<!--模态框-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">新增活动相册</h4>
+            </div>
+            <div id="divAdd">
+                <form action="#" id="addForm">
+                    <p>添加相册名字：<input type="text" id="AlbumsName" name="AlbumsName" title=""></p>
+                    <p>添加相册封面：<input type="file" id="myFile" name="classFile" title=""></p>
+                    <p>添加相册描述：<textarea id="AlbumsText"></textarea></p>
+                    <p>
+                        <button id="btnAddData" type="button"  class="btn btn-default" data-dismiss="modal">确认发布</button>
+                        <button id="btnCancel" type="button" class="btn btn-primary" data-dismiss="modal">取消发布</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.3.4.1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+    //删除字体图标点击事件
+    $("#delFont").click(function () {
+        $("#delFont").parent().attr("href","#");
+        if(confirm("你确定要删除这个相册吗？")){
+            $("#delFont").parent().parent().parent().remove();
+        }
+    });
+    $("#delFont2").click(function () {
+        $("#delFont2").parent().attr("href","#");
+        if(confirm("你确定要删除这个相册吗？")){
+            $("#delFont2").parent().parent().parent().remove();
+
+        }
+    });
+    $("#delFont3").click(function () {
+        $("#delFont3").parent().attr("href","#");
+        if(confirm("你确定要删除这个相册吗？")){
+            $("#delFont3").parent().parent().parent().remove();
+        }
+    });
+
+    //确认发布新建相册
+    $("#btnAddData").click(function () {
+        var AlbumsName=$("#AlbumsName").val();
+        var myFile=$("#myFile").val();
+        var AlbumsText=$("#AlbumsText").val();
+        var reads = new FileReader();
+        var f = $("#myFile").get(0).files[0];
+        reads.readAsDataURL(f);
+        reads.onload=function(){
+            var img = document.createElement("img");
+            img.src =this.result;
+            $("#classPhotoWall section").append(
+                "<div class='container newAlbums' id='newAlbums'>" +
+                "<h3>"+AlbumsName+"</h3>"+"<div>"+"<a href='每个相册.html' class='thumbnail'>" +
+                " <span>"+AlbumsText+"</span>" +
+                "<span class='glyphicon glyphicon-trash newFont' id='delFont4'>"+"</span>"+"</a>"+"</div>");
+            $(".newAlbums div .thumbnail").append(img);
+        }
+    });
+    $(".newFont").click(function () {
+        $(".newFont").parent().attr("href","#");
+        if(confirm("你确定要这个相册吗？")){
+            $(".newFont").parent().parent().parent().remove();
+        }
+    });
+</script>
+</body>
+</html>

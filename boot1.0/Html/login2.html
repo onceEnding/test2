@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <link rel="stylesheet" href="../framework/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="../framework/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+    <script src="../framework/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .bg{
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background-image: url('../img/login_img/bg0.jpg');
+            background-size: 100%;
+            z-index: -1;
+        }
+        .login_box{
+            position: absolute;
+            height: 350px;
+            width: 600px;
+            left: 50%;
+            background: rgba(245, 245, 245, 0.81);
+            margin-left: -300px;
+            top: 25%;
+        }
+        .login_box_cont{
+            height: 308px;
+        }
+        .login_box_cont_bgco{
+            background: #fff387;
+        }
+    </style>
+</head>
+<body>
+<!--背景-->
+<div class="bg"></div>
+<!--登陆界面-->
+<section class="login_box container">
+    <!--选项卡-->
+    <div class="row">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#teacher" data-toggle="tab">教师登录</a></li>
+            <li><a href="#director" data-toggle="tab">园长登录</a></li>
+            <li><a href="#administrator" data-toggle="tab">管理员登录</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div id="myTabContent" class="tab-content text-center">
+            <div class="tab-pane fade in active" id="teacher">
+                <form class="well login_box_cont login_box_cont_bgco">
+                    <h2 class="text-primary">教职工登录入口&nbsp;&nbsp;&nbsp;<small><i class="glyphicon glyphicon-hand-right"><a href="#" style="text-decoration: none;color: #777777"> 相关帮助文档！</a></i></small></h2>
+                    <br>
+                    <label>账号：</label>
+                    <input type="text" class="span3" placeholder="请输入用户账号…">
+                    <br>
+                    <br>
+                    <label>密码：</label>
+                    <input type="password" class="span3" placeholder="请输入用户密码…">
+                    <label class="checkbox">
+                        <input type="checkbox"> 记住密码
+                    </label>
+                    <button type="submit" class="btn btn-primary" style="margin-left: 150px">登录</button>
+                    <button type="submit" class="btn btn-danger" >忘记密码</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="director">
+                <form class="well login_box_cont login_box_cont_bgco">
+                    <h2 class="text-primary" style="margin-top: 10px">园长登录入口&nbsp;&nbsp;&nbsp;<small><i class="glyphicon glyphicon-hand-right"><a href="#" style="text-decoration: none;color: #777777"> 相关帮助文档！</a></i></small></h2>
+                    <br>
+                    <label>账号：</label>
+                    <input type="text" class="span3" placeholder="请输入用户账号…">
+                    <br>
+                    <br>
+                    <label>密码：</label>
+                    <input type="password" class="span3" placeholder="请输入用户密码…">
+                    <br>
+                    <br>
+                    <label>指令：</label>
+                    <input type="password" class="span3" placeholder="请输入认证指令…">
+                    <label class="checkbox">
+                        <input type="checkbox"> 记住密码
+                    </label>
+                    <button type="submit" class="btn btn-primary" style="margin-left: 150px">登录</button>
+                    <button type="submit" class="btn btn-danger" >忘记密码</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="administrator">
+                <form class="well login_box_cont login_box_cont_bgco">
+                    <h2 class="text-primary">管理员登录入口&nbsp;&nbsp;&nbsp;<small><i class="glyphicon glyphicon-hand-right"><a href="#" style="text-decoration: none;color: #777777"> 相关帮助文档！</a></i></small></h2>
+                    <br>
+                    <label>管理员账号：</label>
+                    <input type="text" class="span3" placeholder="请输入用户账号…">
+                    <br>
+                    <br>
+                    <label>管理员密码：</label>
+                    <input type="password" class="span3" placeholder="请输入用户密码…">
+                    <label class="checkbox">
+                        <input type="checkbox"> 记住密码
+                    </label>
+                    <button type="submit" class="btn btn-primary" style="margin-left: 150px"><a href="Home_page3.html" style="color: white;text-decoration: none">登录</a></button>
+                    <button type="submit" class="btn btn-primary">注册</button>
+                    <button type="submit" class="btn btn-danger" >忘记密码</button>
+                </form>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+</body>
+</html>

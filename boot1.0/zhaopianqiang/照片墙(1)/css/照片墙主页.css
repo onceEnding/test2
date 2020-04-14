@@ -1,0 +1,169 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgb(216,224,233);
+}
+button,input{
+    outline:none;
+}
+#photoWall header div h1 a{
+    text-decoration: none;
+    color: black;
+}
+#photoWall{
+    position: relative;
+    width: auto;
+    height: auto;
+}
+#photoWall .left{
+    float: left;
+}
+#photoWall .right{
+    float: right;
+}
+/*头部样式*/
+#photoWall header>div{
+    padding:20px;
+}
+#photoWall header div h1{
+    padding-left: 0;
+}
+#photoWall header button{
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    background-color:rgb(52,122,182);
+    border: none;
+    color: white;
+}
+#photoWall header button:hover{
+    background-color: white;
+    color:rgb(52,122,182);
+}
+#photoWall header>div{
+    box-sizing: border-box;
+}
+#photoWall header div .headerBotton  ul li{
+    list-style-type: none;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 5px;
+    background-color: white;
+}
+#photoWall header div>.headerBotton>ul>li{
+    float: left;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    background-color:rgb(52,122,182);
+    color: white;
+    border-radius: 5px;
+    position: relative;
+}
+#photoWall header div>.headerBotton>ul>li>ul{
+    display: none;
+    width: 100px;
+    position: absolute;
+    z-index: 1;
+    right:0;
+    top:40px;
+
+}
+#photoWall header div>.headerBotton>ul>li:hover ul{
+    display: block;
+}
+#photoWall header div>.headerBotton>ul>li>ul>li{
+    border-bottom: 1px solid #a2a2a2;
+    color:rgb(52,122,182);
+}
+#photoWall header div>.headerBotton>ul>li>ul>li:hover{
+    background-color: #d9f0de;
+}
+/*内容块样式*/
+#photoWall section a{
+    text-align: center;
+    text-decoration: none;
+    color:black ;
+}
+#photoWall section .classAlbumsName{
+    font-size: 20px;
+}
+#photoWall section #lgallery span{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.4);
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    color: white;
+}
+#photoWall section #lgallery .Wrapper .TemplateLgallery{
+    float: left!important;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+#photoWall section #lgallery .Wrapper{
+    overflow: hidden;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+#photoWall section #lgallery .Wrapper .show{
+    float: left;
+    width: 302px;
+    margin-bottom: 257px;
+}
+/*新增相册模态框内容样式*/
+#exampleModal .modal-content{
+    padding-left:50px;
+    background-color: white;
+    box-shadow:2px 2px 10px black;
+}
+#divAdd form input{
+    display: inline-block;
+    margin-left: 28px;
+}
+#divAdd form select:nth-of-type(1){
+    margin-left: 25px;
+}
+#divAdd form textarea{
+    width: 247px;
+    height: 70px;
+}
+#divAdd form p:nth-of-type(1){
+    margin-top: 20px;
+}
+#divAdd form p:nth-of-type(1)>select{
+    height: 25px;
+    line-height: 25px;
+    margin-right: 40px;
+}
+#divAdd form p:nth-of-type(3)>textarea{
+    width: 290px;
+}
+#divAdd form p:nth-of-type(3){
+    vertical-align: middle;
+}
+#divAdd form button{
+    margin-left:100px;
+    margin-top: 30px;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+}
+#divAdd form button:nth-of-type(1){
+    background-color: rgb(50,121,182);
+}
+
+#divAdd form button:nth-of-type(2){
+    background-color: rgb(217,82,78);
+}
+#photoWall  .checkContent .active{
+    display: block;
+}

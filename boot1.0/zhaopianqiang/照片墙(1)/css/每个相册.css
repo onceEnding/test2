@@ -1,0 +1,118 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+button,input{
+    outline:none;
+}
+/*头部*/
+#EveryPhotoWall{
+    background-color:rgb(216,224,233);
+}
+#EveryPhotoWall header a{
+    text-decoration: none;
+}
+#EveryPhotoWall header div{
+    padding: 20px;
+}
+#EveryPhotoWall header div button{
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    background-color:  rgb(52,122,182);
+    color: white;
+    border: none;
+}
+#EveryPhotoWall header div button:nth-of-type(4){
+    background-color: rgb(200,48,44);
+    color: white;
+}
+/*内容*/
+#EveryPhotoWall section div ul li{
+    list-style-type: none;
+    float: left;
+}
+#EveryPhotoWall section div ul{
+    overflow: hidden;
+    margin-left: 15px;
+}
+#EveryPhotoWall section .photoContent ul li{
+    width: 24%;
+    height: 200px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color:white ;
+    position: relative;
+    overflow: hidden;
+}
+#EveryPhotoWall section .photoContent ul li img{
+    width: 100%;
+    height:100%;
+}
+#EveryPhotoWall section .photoContent>ul>li:hover img:nth-of-type(1){
+    transform-origin: 50% 50%;
+    transform:scale(1.2,1.2) ;
+    transition: all 1s linear;
+}
+#EveryPhotoWall section .photoContent ul li a{
+    height: 98%;
+    overflow: hidden;
+}
+#EveryPhotoWall section .photoContent ul li input{
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+/*上传照片模态框内容样式*/
+#exampleModal .modal-content{
+    padding-left:50px;
+    background-color: white;
+    box-shadow:2px 2px 10px black;
+}
+#divAdd form input{
+    display: inline-block;
+    margin-left: 28px;
+}
+#divAdd form select:nth-of-type(1){
+    margin-left: 25px;
+}
+#divAdd form textarea{
+    width: 247px;
+    height: 70px;
+}
+#divAdd form p:nth-of-type(1){
+    margin-top: 20px;
+}
+#divAdd form p:nth-of-type(1)>select{
+    height: 25px;
+    line-height: 25px;
+    margin-right: 40px;
+}
+#divAdd form p:nth-of-type(3)>textarea{
+    width: 290px;
+}
+#divAdd form p:nth-of-type(3){
+    vertical-align: middle;
+}
+#divAdd form button{
+    margin-left:100px;
+    margin-top: 30px;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+}
+#divAdd form button:nth-of-type(1){
+    background-color: rgb(50,121,182);
+}
+
+#divAdd form button:nth-of-type(2){
+    background-color: rgb(217,82,78);
+}
+#photoWall  .checkContent .active{
+    display: block;
+}

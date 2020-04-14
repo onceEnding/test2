@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'tubiao';
+  src:  url('fonts/tubiao.eot?me6rxv');
+  src:  url('fonts/tubiao.eot?me6rxv#iefix') format('embedded-opentype'),
+    url('fonts/tubiao.ttf?me6rxv') format('truetype'),
+    url('fonts/tubiao.woff?me6rxv') format('woff'),
+    url('fonts/tubiao.svg?me6rxv#tubiao') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'tubiao' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bianji:before {
+  content: "\e900";
+  color: rgb(89,131,189);
+  font-size: 15px;
+
+}
+.icon-chakan:before {
+  content: "\e901";
+  font-size: 13px;
+  color: skyblue;
+}
+.icon-shanchu:before {
+  content: "\e902";
+  color: white;
+  font-size: 10px;
+}
+.icon-sousuo .path1:before {
+  content: "\e903";
+  color: #707070;
+}
+.icon-sousuo .path2:before {
+  content: "\e904";
+  margin-left: -1em;
+  color: #707070;
+}
+.icon-sousuo .path3:before {
+  content: "\e905";
+  margin-left: -1em;
+  color: #707070;
+}

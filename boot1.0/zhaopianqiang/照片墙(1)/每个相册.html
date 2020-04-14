@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE-edge" >
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/每个相册.css">
+    <link rel="stylesheet" href="css/pictureViewer.css">
+</head>
+<body>
+<div id="EveryPhotoWall">
+    <header>
+        <div class="container">
+            <h4><a href="照片墙.html">照片墙</a>><a href="每班相册.html">班级相册</a>><span>照片</span></h4>
+            <button type="button" id="btnAddPic" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">上传照片</button>
+            <button type="button" id="btnCheck">选择</button>
+            <button type="button" id="btnCancelCheck">取消选择</button>
+            <button type="button" id="btnDel">删除</button>
+        </div>
+    </header>
+    <section>
+        <div class="photoContent container">
+            <ul id="EveryImg" class="image-list">
+                <li class="cover">
+                    <img src="image/14.jpg" alt="学校生活" title="学校生活">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/15.jpg" alt="手工" title="手工">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/16.jpg" alt="卖萌" title="卖萌">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/30.jpg" alt="可爱的小朋友" title="可爱的小朋友">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/18.jpg" alt="魔方" title="魔方">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/40.jpg" alt="智力开发" title="智力开发">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/31.jpg" alt="绘画" title="绘画">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/21.jpg" alt="同学们的彩笔" title="同学们的彩笔">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/41.jpg" alt="手工时刻" title="手工时刻">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/23.jpg" alt="学校玩区" title="学校玩区">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/33.jpg" alt="上课区域" title="上课区域">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/35.jpg" alt="玩区" title="玩区">
+                    <input type="checkbox">
+                </li>
+                <li class="cover">
+                    <img src="image/4.jpg" alt="上课发言" title="上课发言">
+                    <input type="checkbox">
+                </li>
+
+            </ul>
+        </div>
+    </section>
+</div>
+<!--模态框-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">新增班级相册</h4>
+            </div>
+            <div id="divAdd">
+                <form action="#" id="addForm">
+                    <p>添加照片：<input type="file" id="myFile" name="classFile" title=""></p>
+                    <p>添加照片描述：<textarea id="AlbumsText"></textarea></p>
+                    <p>
+                        <button id="btnAddData" type="button"  class="btn btn-default" data-dismiss="modal">确认上传</button>
+                        <button id="btnCancel" type="button" class="btn btn-primary" data-dismiss="modal">取消上传</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.3.4.1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.mousewheel.min.js"></script>
+<script src="js/pictureViewer.js"></script>
+<script type="text/javascript">
+    //新增照片
+    $("#btnAddData").click(function () {
+        var myFile=$("#myFile").val();
+        var AlbumsText=$("#AlbumsText").val();
+        var reads = new FileReader();
+        var f = $("#myFile").get(0).files[0];
+        reads.readAsDataURL(f);
+        reads.onload=function(){
+            var img = document.createElement("img");
+            img.src =this.result;
+            $("#EveryPhotoWall section .photoContent ul").append(
+                "<li class='newPhoto cover'>"+"<input type=\"checkbox\">"+"</li>");
+            $(".newPhoto").append(img);
+        }
+    });
+
+    //选择按钮点击事件
+    $("#btnCheck").click(function () {
+        $("#EveryImg li input").show();
+    });
+
+    //取消选择
+    $("#btnCancelCheck").click(function () {
+        $("#EveryImg li input").hide();
+    })
+
+    //删除多张照片
+    $("#btnDel").click(function () {
+            var checkBoxChecked=$("#EveryImg li input:checkbox:checked");
+            if(checkBoxChecked){
+                checkBoxChecked.parent("li").remove();
+            }
+    });
+
+    //图片点击放大轮播
+    $(function () {
+        $('.image-list').on('click', '.cover', function () {
+            var this_ = $(this);
+            var images = this_.parents('.image-list').find('.cover');
+            var imagesArr = new Array();
+            $.each(images, function (i, image) {
+                imagesArr.push($(image).children('img').attr('src'));
+            });
+            $.pictureViewer({
+                images: imagesArr, //需要查看的图片，数据类型为数组
+                initImageIndex: this_.index() + 1, //初始查看第几张图片，默认1
+                scrollSwitch: true //是否使用鼠标滚轮切换图片，默认false
+            });
+        });
+    });
+</script>
+</body>
+</html>

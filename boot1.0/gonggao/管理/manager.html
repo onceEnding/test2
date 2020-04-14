@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <style>
+        .btn-change,.btn-del{
+            width: 50px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            font-weight: 300;
+            margin: 0 5px;
+        }
+        .btn-change{
+            background-color:#FF9800 ;
+        }
+        .btn-del{
+            background-color:#D9534F;
+        }
+        .container{
+            position: relative;
+        }
+        #addUser{
+            width: 400px;
+            height: 400px;
+            margin: auto;
+            position: absolute;
+            top:0;
+            right: 0;
+            left:0;
+            bottom: 0;
+            background-color: white;
+            padding: 50px 20px;
+        }
+        table{
+            margin: 150px auto;
+        }
+        .container div>#btnAddForm{
+            position: absolute;
+           left:13px;
+            top: 100px;
+        }
+        .container div>#btnDelForm{
+            position: absolute;
+            left: 70px;
+            top: 100px;
+        }
+        #divPage{
+            position: absolute;
+            left: 510px;
+            top: 400px;
+        }
+        body{
+            background-color: rgb(216,224,233);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header></header>
+    <section>
+        <div class="left"></div>
+        <div class="right">
+            <!-- 工具栏： 面包屑-->
+            <div>
+                 <button class="btn btn-primary" id="btnAddForm">添加</button>
+                 <button class="btn btn-danger" id="btnDelForm">全部删除</button>
+            </div>
+            <!--列表 -->
+            <div>
+                <!-- 搜索-->
+                <div></div>
+                <!-- 表格-->
+                <div>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>姓名</th>
+                            <th>发布时间</th>
+                            <th>发布内容</th>
+                            <th>角色职位</th>
+                            <th>班级名称</th>
+                            <th>班级序号</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="userTable">
+                        
+                        </tbody>
+                    </table>
+
+                </div>
+                <!-- 分页-->
+                <div id="divPage">
+
+                </div>
+
+            </div>
+
+        <!-- 添加表单-->
+
+                <form action="" class="form-horizontal modal fade"  id="addUser" >
+                    <p >ID:<input type="number" class="form-control" id="txtId"/></p>
+                    <p >姓名：<input type="text" class="form-control" id="txtUsername"/></p>
+                    <p >发布时间：<input type="number" class="form-control" id="txtTime"/></p>
+                    <p >发布内容：<input type="text" class="form-control" id="txtNr"/></p>
+                    <p >角色职位：<input type="text" class="form-control" id="txtZw"/></p>
+                    <p >班级名称：<input type="text" class="form-control" id="txtCmc"/></p>
+                    <p >班级序号：<input type="number" class="form-control" id="txtCxh"/></p>
+                    <p ><button class="btn btn-primary" id="btnAdd" type="button">保存</button> <button class="btn btn-default" id="btnCancel" type="button">取消</button></p>
+                </form>
+        </div>
+    </section>
+    <footer>
+
+    </footer>
+</div>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/Manage.js"></script>
+</body>
+</html>

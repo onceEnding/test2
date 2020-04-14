@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>职工管理</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <style>
+
+        /*canvas开始*/
+        html, body {
+            position: relative;
+            z-index: -10;
+            /*display: block;*/
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            /*background: black;*/
+
+        background: linear-gradient(
+            to bottom,
+            #c6ffdd 0%,
+            #fbd786 40%,
+            #f7797d 100%
+        );
+
+        /*background: linear-gradient(to bottom, rgb(118,34,124) 0%, rgb(204,19,113) 25%, rgb(234,197,8) 50%, rgb(252,135,154) 75%, rgb(118,34,124) 100%);*/
+        }
+
+        #main-canvas {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: block;
+            z-index: -5;
+        }
+
+        #canvas{
+            position: absolute;
+            top: 0;
+            left:0;
+        }
+
+        .filter {
+            width: 100%;
+            height: 100%;
+            /*position: absolute;*/
+            display: block;
+            z-index: -4;
+            top: 0;
+            left: 0;
+            background: #fe5757;
+            animation: colorChange 30s ease-in-out infinite;
+            animation-fill-mode: both;
+            mix-blend-mode: overlay;
+
+        }
+
+        @keyframes colorChange {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: .7;
+            }
+        }
+        /*canvas结束*/
+
+
+        .zhiHeader{
+            margin-top: -5px;
+        }
+        #wrap{
+            margin: 40px 0;
+            width: 100%;
+            min-height: 100%;
+            display: block;
+            overflow: auto;
+            position: relative;
+            z-index: 1;
+            opacity: .9;
+            background-color: inherit;
+        }
+        .row1{
+            margin: 20px 0;
+        }
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle!important;
+        }
+        .Page{
+            height: 34px;
+        }
+        .searchBtn{
+            overflow: hidden;
+            text-align: center;
+            border-radius: 4px!important;
+            vertical-align: middle;
+        }
+        .hrCss{margin:30px 0;color:#eee;}
+        .wordWhite{color:rgb(250,134,126);}
+        /*.wordBlue{color:#123597;}*/
+        /*模态框开始*/
+        /*#myModal{display: block;position: absolute; z-index: 50}*/
+        /*.modal-backdrop{display: block;position: absolute;z-index: 30}*/
+
+
+
+        .mhPadding{padding:20px;}
+        .mbPadding{padding-left:40px;padding-right:40px;padding-top:40px;padding-bottom:40px;}
+        .mbWordDiv{height:40px;line-height:40px;}
+        .mbWordDivP{font-size:17px;height:34px;line-height:34px;text-align:right;}
+        .mbInput{margin:0}
+        .mfPadding{padding-top:30px;padding-bottom: 40px;}
+        .ali{margin-top:10px;margin-bottom:5px;}
+        .textLeftPadding{text-align:left;}
+        .addBtn{padding-top:7%;font-size:18px;margin-top:-8px;margin-left:25%;width:75%;height:100%}
+        /*模态框结束*/
+    </style>
+</head>
+<body>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header mhPadding">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title" id="myModalLabel">职工信息</h3>
+            </div>
+            <div class="modal-body mbPadding">
+                <div id="idEr" class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 mbWordDiv">
+                        <p class="mbWordDivP">编号</p>
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8">
+                        <input type="text" placeholder="请输入编号" class="form-control mbInput"/>
+                    </div>
+                </div>
+                <div id="nameEr" class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 mbWordDiv">
+                        <p class="mbWordDivP">姓名</p>
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8">
+                        <input type="text" placeholder="请输入姓名" class="form-control mbInput"/>
+                    </div>
+                </div>
+                <div id="sexEr" class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 mbWordDiv">
+                        <p class="mbWordDivP">性别</p>
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8">
+                        <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-default btn-block dropdown-toggle mbInput textLeftPadding" data-toggle="dropdown">
+                                <span class="buttonText">男</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu btn-block mbInput textLeftPadding" role="menu">
+                                <li><a href="#" class="ali">男</a></li>
+                                <li><a href="#" class="ali">女</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="emailEr" class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 mbWordDiv">
+                        <p class="mbWordDivP">邮箱</p>
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8">
+                        <input type="text" placeholder="请输入邮箱" class="form-control mbInput"/>
+                    </div>
+                </div>
+
+
+                <div id="jobEr" class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 mbWordDiv">
+                        <p class="mbWordDivP">职务</p>
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8">
+                        <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-default btn-block dropdown-toggle textLeftPadding" data-toggle="dropdown">
+                                <span class="buttonText">教师</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu btn-block textLeftPadding" role="menu">
+                                <li><a href="#" class="ali">教师</a></li>
+                                <li><a href="#" class="ali">教导主任</a></li>
+                                <li><a href="#" class="ali">园长</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="classEr" class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 mbWordDiv">
+                        <p class="mbWordDivP">班级</p>
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8">
+                        <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-default btn-block dropdown-toggle textLeftPadding" data-toggle="dropdown">
+                                <span class="buttonText">小班</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu btn-block textLeftPadding" role="menu">
+                                <li><a href="#" class="ali">小班</a></li>
+                                <li><a href="#" class="ali">中班</a></li>
+                                <li><a href="#" class="ali">大班</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="depEr" class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 mbWordDiv">
+                        <p class="mbWordDivP">部门</p>
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8">
+                        <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-default btn-block dropdown-toggle textLeftPadding" data-toggle="dropdown">
+                                <span class="buttonText">行政部</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu btn-block textLeftPadding" role="menu">
+                                <li><a href="#" class="ali">行政部</a></li>
+                                <li><a href="#" class="ali">财务部</a></li>
+                                <li><a href="#" class="ali">后勤部</a></li>
+                                <li><a href="#" class="ali">教育部</a></li>
+                                <li><a href="#" class="ali">保卫部</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bornDate">
+                    <div class="col-sm-3 col-md-3 col-lg-3 mbWordDiv">
+                        <p class="mbWordDivP">出生日期</p>
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        <!--<input type="date" class="form-control mbInput"/>-->
+                        <div class="input-group date" id="datetimepicker">
+                            <input type="text" placeholder="年/月/日" class="form-control" />
+                                                            <span class="input-group-addon">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="telEr" class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3 mbWordDiv">
+                        <p class="mbWordDivP">手机号码</p>
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8">
+                        <input type="text" placeholder="请输入手机号码" class="form-control mbInput"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer mfPadding">
+                <button style="padding:7px 25px" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button style="padding:7px 25px" type="button" class="btn btn-primary" onclick="saveBtn()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+
+<div id="wrap">
+
+    <div class="container-fluid">
+
+        <!-- Main window -->
+        <div class="main_container" id="tables_page">
+
+            <div class="row1 row-fluid">
+                <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-lg-10 col-lg-offset-1">
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-2">
+                            <h2 class="heading zhiHeader wordWhite">
+                                职工管理
+                            </h2>
+                        </div>
+                        <div class="col-xs-8 col-sm-10">
+                            <!-- Single button -->
+                            <!--<div class="btn-group col-xs-4 col-sm-2">-->
+                                <!--<button type="button" class="textLeftPadding searchBtn form-control btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                    <!--<span class="buttonText">请选择编号</span><span class="caret"></span>-->
+                                <!--</button>-->
+                                <!--<ul class="dropdown-menu textLeftPadding">-->
+                                    <!--<li><a href="#" class="ali">请选择编号</a></li>-->
+                                    <!--<li><a href="#" class="ali">1</a></li>-->
+                                    <!--<li><a href="#" class="ali">2</a></li>-->
+                                    <!--<li><a href="#" class="ali">3</a></li>-->
+                                    <!--<li><a href="#" class="ali">4</a></li>-->
+                                    <!--<li><a href="#" class="ali">5</a></li>-->
+                                    <!--<li><a href="#" class="ali">6</a></li>-->
+                                    <!--<li><a href="#" class="ali">7</a></li>-->
+                                    <!--<li><a href="#" class="ali">8</a></li>-->
+                                    <!--<li><a href="#" class="ali">9</a></li>-->
+                                    <!--<li><a href="#" class="ali">10</a></li>-->
+                                    <!--<li><a href="#" class="ali">11</a></li>-->
+                                    <!--<li><a href="#" class="ali">12</a></li>-->
+                                    <!--<li><a href="#" class="ali">13</a></li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                            <div class="btn-group col-xs-4 col-sm-2">
+                                <input id="filterId" class="textLeftPadding searchBtn form-control" type="text" placeholder="请输入编号">
+                            </div>
+                            <div class="btn-group col-xs-4 col-sm-2">
+                                <button type="button" class="textLeftPadding searchBtn form-control btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span id="filterJob" class="buttonText">请选择职务</span><span class="caret"></span>
+                                </button>
+                                <ul class="textLeftPadding dropdown-menu">
+                                    <li><a href="#" class="ali">请选择职务</a></li>
+                                    <li><a href="#" class="ali">教师</a></li>
+                                    <li><a href="#" class="ali">教导主任</a></li>
+                                    <li><a href="#" class="ali">园长</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group col-xs-4 col-sm-2">
+                                <input id="filterName" class="textLeftPadding searchBtn form-control" type="text" placeholder="请输入姓名关键字">
+                            </div>
+                            <div class="btn-group col-xs-2 col-sm-1" style="">
+                                <button onclick="searchIt()" type="button"style="outline:0;" class="textLeftPadding searchBtn form-control btn btn-default">
+                                    <!--onclick="searchIt()"-->
+                                    <span id="filterSure"  class="glyphicon glyphicon-search" style="font-size:20px; color:#7BD77B" aria-hidden="true"></span>
+                                </button>
+                            </div>
+
+
+                            <!--新增模态框开始-->
+                            <div class="btn-group col-xs-4 col-sm-2 col-sm-offset-3">
+                                <!-- Contextual button for informational alert messages -->
+                                <!-- Button trigger modal -->
+                                <button onclick="addOper()" type="button" class="addBtn form-control searchBtn btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#myModal">
+                                    新增
+                                </button>
+                            </div>
+                            <!--新增模态框结束-->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row1 row-fluid">
+                <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-lg-10 col-lg-offset-1">
+                    <hr class="hrCss simple"/>
+                </div>
+            </div>
+
+
+            <div class="row-fluid">
+                <div class="widget widget-padding span12">
+                    <div class="widget-body">
+                        <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 col-lg-10 col-lg-offset-1 ">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th><input id="getAll" type="checkbox" class="btn btn-primary/"></th>
+                                    <th>编号</th>
+                                    <th>姓名</th>
+                                    <th>性别</th>
+                                    <th>手机号码</th>
+                                    <th>职务</th>
+                                    <th>出生日期</th>
+                                    <th>邮箱</th>
+                                    <th>班级</th>
+                                    <th>部门</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody">
+
+                                </tbody>
+                            </table>
+                            <div class="col-lg-4">
+                                <button type="button" class="btn btn-danger delAll">全部删除</button>
+                            </div>
+                            <div class="col-lg-5 col-lg-offset-3" >
+                                <div aria-label="Page navigation" style="margin-top:-20px">
+                                    <ul class="pagination">
+                                        <li>
+                                            <a class="prev" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li><a class="first" href="#">首页</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a class="last" href="#">尾页</a></li>
+                                        <li>
+                                            <a class="next" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div><!--/widget-body-->
+            </div> <!-- /widget -->
+        </div> <!-- /row-fluid -->
+    </div>
+
+</div><!--/.fluid-container-->
+</div><!-- wrap ends-->
+
+<canvas id="canvas"></canvas>
+<!--<script type="text/javascript" color="102,185,255" opacity="50" zIndex="-2" count="99" src="//static.ffis.me/javascript/canvas-nest.min.js"></script>-->
+
+<script src="jquery.3.4.1.js"></script>
+<script src="canvasstar.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+<script src="moment-with-locales.min.js"></script>
+<script src="bootstrap-datetimepicker.min.js"></script>
+<script src="kind.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+
+    var Tbody = $("#tbody");
+    var Tid;//职工编号
+    var Tname;//职工姓名
+    var Tsex;//职工性别
+    var Temail;//职工邮箱
+    var Tjob;//职工职务
+    var Tclass;//职工班级
+    var Tdep;//职工部门
+    var Tdate;//职工出生日期
+    var Ttel;//职工电话号码
+    var searchdata;//用于搜索时的数据
+    var Num = 5;//每页显示的个数
+    var Nmax;
+    var Nmin;
+    var pageType;
+    var operType;//默认为1添加，2为修改
+    var delIndex;
+    var modIndex;
+//    var showType=1; //默认数据为1，搜索数据为2
+
+    window.onload=function(){
+        var showType=1;
+        searchIt();
+    }
+//     //json文件中数据获取
+//     function jsonGet(){
+//         $.ajax({
+//             contentType: "charset=UTF-8",
+//             type: "GET",
+//             url: "dataTest2.json",
+//             async: false, //改异步传值为同步，数据在函数外可调用
+//             dataType: "json",
+//             success: function(res) {
+
+//                 data = res.result;
+// //                console.log("here is tid"+data);
+// //                console.log("tid"+data[0]);
+// //                console.log("value "+data[0].tid)
+//             }
+//         });
+//     }
+//     $(function(){
+// //        function ajaxVal(Data){
+//         jsonGet();
+//     });
+
+
+
+    //下列列表选项选中
+    $(".ali").click(function(){
+        $(this).parent().parent().prev().children(".buttonText").html($(this).text());
+    });
+
+
+
+    //日历初始化
+    $(function () {
+        $("#datetimepicker").datetimepicker({
+            format: "YYYY-MM-DD",
+            locale: moment.locale("zh-cn")
+        });
+    });
+
+
+    //修改按钮触发事件
+    function modOper(index){
+        modIndex = index;
+        operType = 2;//修改
+        $('#idEr').find("input").attr('disabled',true);
+        $('#idEr').find("input").attr('placeholder','');
+    }
+
+
+    //新增按钮触发事件
+    function addOper(){
+//        console.log("add");
+        operType = 1;//新增
+//        $(".modal-backdrop").remove();
+        $('#idEr').find("input").attr('disabled',false);
+        /*#myModal{display: block;position: absolute; z-index: 50}*/
+        $('.modal-backdrop').css({
+            "position":"relative",
+            "z-index": 10
+        });
+    }
+
+
+    //保存操作
+    function saveBtn(){
+
+            Tid = $("#idEr").find("input").val();
+            Tname = $("#nameEr").find("input").val();
+            Tsex = $("#sexEr").find(".buttonText").text();
+            Temail = $("#emailEr").find("input").val();
+            Tjob = $("#jobEr").find(".buttonText").text();
+            Tclass = $("#classEr").find(".buttonText").text();
+            Tdep = $("#depEr").find(".buttonText").text();
+            Tdate = $("#datetimepicker").find("input").val();
+            Ttel = $("#telEr").find("input").val();
+            if(operType==1){
+
+                tdata.push({
+                    "tid": Tid,
+                    "tname": Tname,
+                    "tsex": Tsex,
+                    "ttel": Ttel,
+                    "tjob": Tjob,
+                    "tdate": Tdate,
+                    "temail": Temail,
+                    "tclass": Tclass,
+                    "tdep": Tdep
+                }) ;
+
+                for(var i=0;i<ddata.length;i++){
+                    var a = ddata[i];
+                    Object.keys(a).forEach(function(key){
+                        if(a[key]==Tdep){
+                            ddata[i].dnum++;
+                        }
+                    })
+                }
+
+
+            }else if(operType==2){
+//                $("#idEr").attr("readonly", "true");
+                Tid = modIndex+1;
+                tdata.splice(modIndex,1,{
+                    "tid": Tid,
+                    "tname": Tname,
+                    "tsex": Tsex,
+                    "ttel": Ttel,
+                    "tjob": Tjob,
+                    "tdate": Tdate,
+                    "temail": Temail,
+                    "tclass": Tclass,
+                    "tdep": Tdep
+                });
+            }
+
+            alert("ok");
+            Tbody.empty();
+            Nmin = 0;//下一页最顶，不算当前元素
+            Nmax = Num;//一页最顶
+            bindTable(tdata,Nmin,Nmax);
+
+//            console.log("职工出生日期："+Tid);
+//            console.log("职工姓名："+Tname);
+//            console.log("职工性别："+Tsex);
+//            console.log("职工邮箱："+Temail);
+//            console.log("职工职务："+Tjob);
+//            console.log("职工班级："+Tclass);
+//            console.log("职工部门："+Tdep);
+//            console.log("职工出生日期："+Tdate);
+//            console.log("职工电话号码："+Ttel);
+//            console.log("data："+data);
+            $("#myModal").modal('hide');
+            $(".modal-backdrop").remove();
+        }
+
+
+    //关闭模态框后清空数据
+    $('#myModal').on('hide.bs.modal', function () {
+        // 执行一些动作...
+        $("#idEr").find("input").val("");
+        $("#nameEr").find("input").val("");
+        $("#sexEr").find(".buttonText").text("男");
+        $("#emailEr").find("input").val("");
+        $("#jobEr").find(".buttonText").text("教师");
+        $("#classEr").find(".buttonText").text("小班");
+        $("#datetimepicker").find("input").val("");
+        $("#depEr").find(".buttonText").text("行政部");
+        $("#telEr").find("input").val("");
+    });
+
+    function searchIt(){
+        showType=2;
+        if($('#filterId').val()!=""){
+//            console.log("emmm")
+            var idmin = $('#filterId').val();
+            Tbody.empty();
+            bindTable(tdata,idmin-1,idmin);
+        }
+        if($('#filterJob').text()!="请选择职务"){
+            Tbody.empty();
+            searchdata=[];
+
+            var jobmin = $('#filterJob').text();
+//            var kArr=[]; //筛选得到的索引数组
+            console.log(jobmin);
+            for(var j=0;j<tdata.length;j++){
+                var a = tdata[j];
+
+                Object.keys(a).forEach(function(key) {
+                    if (a[key] == jobmin) {
+//                        alert('exists');
+                        console.log(j+"//"+a[key]);
+//                        kArr.push(k);
+                        searchdata.push(tdata[j]);
+//                        bindTable(data,k,k+1);
+                    }
+//                console.log(data[key])
+
+
+                })
+
+            }
+            bindTable(searchdata,0,5);
+        }
+
+
+        if($('#filterName').val()!=""){
+            Tbody.empty();
+            searchdata=[];
+            var namemin = $('#filterName').val();
+            var h;
+            var temp;
+            var tempArr=[];
+            var hArr=[]; //筛选得到的索引数组
+            var cstring;
+            for(var l=0;l<tdata.length;l++){
+                var c = tdata[l];
+
+                Object.keys(c).forEach(function(key) {
+                    cstring = c[key].toString();
+                    if (cstring.indexOf($('#filterName').val())!=-1) {
+                        tempArr.push(l);
+                        searchdata.push(tdata[l]);
+                    }
+
+                })
+            }
+            bindTable(searchdata,0,5);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+//    function searchIt(){
+//        showType=2;
+//        if($('#filterId').val()!=""){
+////            console.log("emmm")
+//            var idmin = $('#filterId').val();
+//            Tbody.empty();
+//            bindTable(data,idmin-1,idmin);
+//        }
+//        if($('#filterJob').text()!="请选择职务"){
+//            Tbody.empty();
+//            searchdata=[];
+//
+//            var jobmin = $('#filterJob').text();
+////            var kArr=[]; //筛选得到的索引数组
+//            console.log(jobmin);
+//            for(var j=0;j<data.length;j++){
+//                var a = data[j];
+//
+//                Object.keys(a).forEach(function(key) {
+//                    if (a[key] == jobmin) {
+////                        alert('exists');
+//                        console.log(j+"//"+a[key]);
+////                        kArr.push(k);
+//                        searchdata.push(data[j]);
+////                        bindTable(data,k,k+1);
+//                    }
+////                console.log(data[key])
+//
+//
+//                })
+//
+//            }
+//            bindTable(searchdata,0,5);
+//        }
+//
+//
+//        if($('#filterName').val()!=""){
+//            Tbody.empty();
+//            searchdata=[];
+//            var namemin = $('#filterName').val();
+//            var h;
+//            var temp;
+//            var tempArr=[];
+//            var hArr=[]; //筛选得到的索引数组
+//            var cstring;
+//            for(var l=0;l<data.length;l++){
+//                var c = data[l];
+//
+//                Object.keys(c).forEach(function(key) {
+//                    cstring = c[key].toString();
+//                    if (cstring.indexOf($('#filterName').val())!=-1) {
+//                        tempArr.push(l);
+//                        searchdata.push(data[l]);
+//                    }
+//
+//                })
+//            }
+//            bindTable(searchdata,0,5);
+//        }
+//    }
+
+
+
+//    //按关键字搜索
+//    $(function() {
+//        $('#filterName').keyup(function(){
+//            $('table tbody tr').hide()
+//                    .filter(":contains('" +($(this).val()) + "')").show();
+//        }).keyup();//DOM加载完时，绑定事件完成之后立即触发
+//
+//    });
+
+
+    //各个搜索框失去焦点时表格显示
+    $(function() {
+        $('#filterId').blur(function() {
+//            console.log($('#filterId').val())
+
+            if ($(this).val() == '') {
+                showType=1;
+                Tbody.empty();
+                Nmin = 0;//下一页最顶，不算当前元素
+                Nmax = Num;//一页最顶
+                bindTable(tdata,Nmin,Nmax);
+            }
+        });
+        $('#filterJob').blur(function() {
+            if ($('#filterJob').text() == '请选择职务') {
+                showType=1;
+                Tbody.empty();
+                Nmin = 0;//下一页最顶，不算当前元素
+                Nmax = Num;//一页最顶
+                bindTable(tdata,Nmin,Nmax);
+            }
+        });
+        $('#filterName').blur(function() {
+            if ($(this).val() == '') {
+                showType=1;
+                Tbody.empty();
+                Nmin = 0;//下一页最顶，不算当前元素
+                Nmax = Num;//一页最顶
+                bindTable(tdata,Nmin,Nmax);
+            }
+        });
+    });
+
+
+    //实现全选反选
+    //id换成对应按钮的id，class为对应input的class
+    $(document).on('click','#getAll',function(){
+//        $(this).css("background","red");
+        if($(this).is(":checked")){
+            $('.checkItem').prop('checked',true);
+        }else{
+            $('.checkItem').prop('checked',false);
+        }
+    })
+
+
+    //全部删除
+    $(".delAll").click(function(){
+        Tbody.empty();
+        tdata=[];
+    });
+
+
+    //单击按钮删除
+    function delOper(index) {
+        delIndex = index;
+        console.log(delIndex);
+        console.log(tdata[delIndex]);
+        tdata.splice(delIndex,1);//删
+        console.log(tdata);
+//        data[0].remove();//删
+        Tbody.empty();
+        Nmin = 0;//下一页最顶，不算当前元素
+        Nmax = Num;//一页最顶
+        bindTable(tdata,Nmin,Nmax);
+
+//        bindTable(0,index);
+//        bindTable(index,data.length);
+    }
+
+
+//function del(index){
+//        $(obj).on('click',function(e){
+//            event.stopPropagation();
+//            console.log($(obj).parent().parent().attr("data-id"));
+//        });
+//
+//        $('tbody tr').off('click',obj).on('click',obj,function(){//删除所加 tab 节点的函数
+////            var hang = $(obj.parentNode).parent().prevAll().length+1;
+////            console.log($(obj).parent().parent().attr("id"));
+//            console.log(index);
+//        });
+//
+//        $(obj).on('click',function(){
+////            var dataId = this.getAttribute("data-id");
+//            var dataId = $(obj).parent().parent().attr("data-id");
+//            console.log(dataId);
+//            console.log(dataId+"结果");
+////            console.log(obj);
+//        });
+//    }
+
+//    //选中当前行，并显示index
+//    $("tr").on('click',function(){
+//        console.log($(this).index());
+//    });
+
+
+//    data绑定到表格上
+    function bindTable(ndata,nmin,nmax){
+        var Str;
+//        var id=-1;
+        $.each(ndata, function(i, obj) {
+
+            if(i>=nmin && i<nmax){
+                Str +=`<tr class="idtr" id=${"tr"+i} data-id=${i+1}>
+                              <td>
+                                  <div class="checkbox">
+                                      <label>
+                                          <input class="checkItem" type="checkbox">
+                                      </label>
+                                  </div>
+                              </td>
+                              <td>${obj.tid}</td>
+                              <td>${obj.tname}</td>
+                              <td>${obj.tsex}</td>
+                              <td>${obj.ttel}</td>
+                              <td>${obj.tjob}</td>
+                              <td>${obj.tdate}</td>
+                              <td>${obj.temail}</td>
+                              <td>${obj.tclass}</td>
+                              <td>${obj.tdep}</td>
+                              <td>
+                                   <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary" onclick="modOper(${i})">编辑</button>
+                                   <button type="button" class="btn btn-danger" onclick="delOper(${i})">删除</button>
+                              </td>
+                           </tr>`;
+            }
+        });
+        Tbody.append(Str);
+    }
+
+//     表格初始化
+    $(function(){
+        Tbody.empty();
+        Nmin = 0;//下一页最顶，不算当前元素
+        Nmax = Num;//一页最顶
+        bindTable(tdata,Nmin,Nmax);
+    });
+
+    //表格翻页
+    $(function(){
+        $(".next").click(function () {
+            Tbody.empty();
+            Nmin += Num;//最小
+            Nmax += Num;//最大
+            if(Nmin<tdata.length-1){
+//                if(showType==1){  //假如只是数据展示showType=1
+                    bindTable(tdata,Nmin,Nmax);
+//                }else if(showType==2){  //假如是搜索后的数据展示showType=2
+//                    bindTable(searchdata,Nmin,Nmax);
+//                }
+            }else{
+                Tbody.empty();
+                Nmin -= Num;//
+                Nmax -= Num;//
+//                if(showType==1){  //假如只是数据展示showType=1
+                    bindTable(tdata,Nmin,Nmax);
+//                }else if(showType==2){  //假如是搜索后的数据展示showType=2
+//                    bindTable(searchdata,Nmin,Nmax);
+                }
+//            }
+        });
+        $(".prev").click(function () {
+
+            Tbody.empty();
+            Nmin -= Num;//
+            Nmax -= Num;//
+            if(Nmax>0){
+//                if(showType==1){  //假如只是数据展示showType=1
+                    bindTable(tdata,Nmin,Nmax);
+//                    console.log(Nmin+"pre min/"+Nmax);
+
+//                }else if(showType==2){  //假如是搜索后的数据展示showType=2
+//                    bindTable(searchdata,Nmin,Nmax);
+//                    console.log(Nmin+"pre min/"+Nmax);
+//
+//                }
+//                console.log(Nmin+"pre min/"+Nmax);
+            }else{
+                Tbody.empty();
+                Nmin += Num;//
+                Nmax += Num;//
+//                if(showType==1){  //假如只是数据展示showType=1
+                    bindTable(tdata,Nmin,Nmax);
+//                }else if(showType==2){  //假如是搜索后的数据展示showType=2
+//                    bindTable(searchdata,Nmin,Nmax);
+//                }
+            }
+        });
+        $(".first").click(function () {
+            Tbody.empty();
+            Nmin = 0;//
+            Nmax = Num;//
+//            if(showType==1){  //假如只是数据展示showType=1
+                bindTable(tdata,Nmin,Nmax);
+//            }else if(showType==2){  //假如是搜索后的数据展示showType=2
+//                bindTable(searchdata,Nmin,Nmax);
+//            }
+
+        });
+        $(".last").click(function () {
+            Tbody.empty();
+            Nmax = tdata.length+(tdata.length%Num)-1;
+            Nmin = tdata.length+(tdata.length%Num)-6;
+//            if(showType==1){  //假如只是数据展示showType=1
+                bindTable(tdata,Nmin,Nmax);
+//            }else if(showType==2){  //假如是搜索后的数据展示showType=2
+//                bindTable(searchdata,Nmin,Nmax);
+//            }
+        });
+    });
+
+    //    canvas开始
+   var CanvasStar = new CanvasStar;
+   CanvasStar.init();
+
+    //    canvas结束
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>幼儿园管理系统</title>
+    <link rel="stylesheet" href="../framework/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="../framework/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+    <script src="../framework/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*头部*/
+        header{
+            position: fixed;
+            width: 100%;
+            height: 50px;
+            background: #1b6d85;
+        }
+        .myheadline{
+            height: 50px;
+            background: #0B9BA9;
+            color: white;
+            padding-top: 10px;
+            font-size: 18px;
+        }
+        .myheadmenu{
+            background:none;
+            border: none;
+        }
+        .collapse{
+            float: left;
+            padding-top: 12px;
+            font-size: 17px;
+        }
+        .collapse a{
+            color: #5a8499;
+        }
+        .collapse a:hover{
+            color: #0e1a5e;
+        }
+        .navbar-header{
+            margin-top: 5px;
+        }
+        .navbar-header button{
+            float: left;
+            width: 30px;
+            height: 30px;
+        }
+        .navbar-header button span{
+            margin-left: -7px;
+            margin-top: -3px;
+        }
+        .myname{
+            float: right;
+            padding-top: 15px;
+            padding-left: 10px;
+            font-size: 18px;
+            height: 50px;
+            width: 150px;
+            color: whitesmoke;
+        }
+        .myhead{
+            float: right;
+            border: solid 1px silver;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background: url("../img/head.jpg") no-repeat;
+            background-size: 100%;
+        }
+        .myi1{
+            float: right;
+            padding-top: 15px;
+            font-size: 20px;
+            height: 50px;
+            width: 40px;
+        }
+        /*导航*/
+        .sect1{
+            position: absolute;
+            margin-top: 50px;
+            width: 100%;
+        }
+        .mymenu1{
+            height:900px ;
+            background: #585858;
+        }
+        .mysearch{
+            height: 50px;
+            text-align: center;
+        }
+        .mybtn{
+            background: none;
+            border: none;
+            padding-left: 5px;
+            color: whitesmoke;
+        }
+        .mymenu1 ul li{
+            color: whitesmoke;
+            list-style: none;
+            text-align: center;
+            font-size: 20px;
+            line-height: 50px;
+        }
+        .mymenu1 ul li a{
+            padding-left: 20px;
+            color: whitesmoke;
+        }
+        .mymenu1 ul li a:hover{
+            color: #1c4285;
+        }
+        /*内容*/
+        .sect1_cont2{
+            height: 900px;
+            background: #0B9BA9;
+        }
+    </style>
+</head>
+<body>
+<!--头部-->
+<header class="row">
+    <!--标题-->
+    <div class="col-sm-2 col-md-2 col-xs-3 myheadline text-center">幼儿园管理系统</div>
+    <!--汉堡按钮-->
+    <div class="col-sm-6 col-md-6 col-xs-2 navbar navbar-default myheadmenu">
+        <div href="" class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle text-center" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <a href="">登录</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <a href="">注册</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <a href="">我的资料</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <a href="">系统主题</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <a href="">个性装扮</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <a href="">联系客服</a>
+            </div>
+        </div>
+    </div>
+    <!--个人资料-->
+    <div class="col-sm-3 col-md-3 col-xs-6">
+        <div class="myname">憨憨的瑶姐姐</div>
+        <div class="myhead"></div>
+        <i class="glyphicon glyphicon-envelope myi1"></i>
+        <i class="glyphicon glyphicon-bell myi1"></i>
+        <i class="glyphicon glyphicon-text-size myi1"></i>
+    </div>
+</header>
+<!--左侧导航-->
+<section class="sect1 row">
+    <nav style="background: #145da9">
+        <div class="col-sm-2 col-md-2 col-xs-3 mymenu1">
+            <div class="myhead" style="float: left;margin-left: 30px;margin-top: 30px"></div>
+            <div class="myname" style="float: left;margin-top: 30px;">憨憨的瑶姐姐 <span></span></div>
+            <div class="mysearch col-sm-12 col-md-12 col-xs-12"><input style="margin-top: 20px;width: 70%" type="text"><button class="glyphicon glyphicon-search mybtn"></button></div>
+            <ul class="" style="margin-top: 100px">
+                <li><i class="glyphicon glyphicon-blackboard"></i><a href="#">部门管理</a></li>
+                <li><i class="glyphicon glyphicon-education"></i><a href="#">教职工管理</a></li>
+                <li><i class="glyphicon glyphicon-list"></i><a href="#">班级管理</a></li>
+                <li><i class="glyphicon glyphicon-user"></i><a href="#">学生管理</a></li>
+                <li><i class="glyphicon glyphicon-picture"></i><a href="#">照片墙</a></li>
+                <li><i class="glyphicon glyphicon-ok-circle"></i><a href="#">考勤管理</a></li>
+                <li><i class="glyphicon glyphicon-paperclip"></i><a href="#">工具管理</a></li>
+                <li><i class="glyphicon glyphicon-info-sign"></i><a href="#">权限管理</a></li>
+
+            </ul>
+        </div>
+    </nav>
+    <div class="col-sm-10 col-md-10 col-xs-9 sect1_cont2 text-center">
+        <div class="row" >
+            <div class="col-md-1"></div>
+            <div class="col-md-10" style="height: 200px;background: red;margin-top: 100px"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2" style="height: 300px;background: yellow"></div>
+            <div class="col-md-6" style="height: 300px;background: blue"></div>
+            <div class="col-md-2" style="height: 300px;background: yellow"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10" style="height: 200px;background: red"></div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
